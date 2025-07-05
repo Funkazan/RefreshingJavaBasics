@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Person {
     String name;
@@ -52,8 +53,39 @@ class Cat extends Animal {
     }
 }
 
+class LoginFailedException extends Exception {
+    public LoginFailedException(String message) {
+        super(message);
+    }
+}
+
+class LoginSystem {
+    public static void login(String username, String password) throws LoginFailedException {
+        String correctUser = "volkan";
+        String correctPassword = "freelance123";
+
+        if(!username.equals(correctUser) || !password.equals(correctPassword)) {
+            throw new LoginFailedException("wrong username or password!");
+        }
+        System.out.println("Login succeeded!");
+    }
+}
+
 public class mainFile {
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Username: ");
+        String user = input.nextLine();
+        System.out.println("Password: ");
+        String pass = input.nextLine();
+
+        try{
+            LoginSystem.login(user, pass);
+        } catch (LoginFailedException e) {
+            System.out.println("failed to login: " + e.getMessage());
+        }
+        input.close();
+
         Student p1 = new Student("Volkan", 33, "Computer Sciences");
         ArrayList<Animal> pet = new ArrayList<>();
         try {
