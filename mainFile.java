@@ -27,10 +27,32 @@ class Student extends Person {
     }
 }
 
+class Animal {
+    public void sound() {
+        System.out.println("The animal makes a sound!");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("The dog is barking!");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("The cat is mewing!");
+    }
+}
+
 public class mainFile {
     public static void main(String[] args) {
         Student p1 = new Student("Volkan", 33, "Computer Sciences");
         p1.introduce();
+        Animal a1 = new Cat();
+        a1.sound();
     }
 
     //This creates an object with specific attributes.
