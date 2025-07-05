@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 class Person {
@@ -51,13 +55,22 @@ class Cat extends Animal {
 public class mainFile {
     public static void main(String[] args) {
         Student p1 = new Student("Volkan", 33, "Computer Sciences");
-        p1.introduce();
         ArrayList<Animal> pet = new ArrayList<>();
-        pet.add(new Cat());
-        pet.add(new Dog());
-
-        for (Animal a : pet) {
-            a.sound();
+        try {
+            BufferedReader r = new BufferedReader(new FileReader("text.txt"));
+            int l1 = Integer.parseInt(r.readLine());
+            int l2 = Integer.parseInt(r.readLine());
+            int result = l1 / l2;
+            System.out.println("Result: " + result);
+            r.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("the data could not be found!");
+        } catch (ArithmeticException e) {
+            System.err.println("Error: division with 0 is not allowed!");  
+        } catch (IOException e) {
+            System.err.println("failed to read the data: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error: the data doesn't have valid number.");
         }
     }
 
