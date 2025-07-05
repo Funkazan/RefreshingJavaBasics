@@ -2,16 +2,17 @@ import java.util.ArrayList;
 
 public class mainFile {
     public static void main(String[] args) {
-        String name = "Volkan";
-        int age = 33;
-        double weight = 82.05;
-        boolean isCsStudent = true;
-
         person("Volkan", 33, "B. Sc.", "Computer Sciences");
-        System.out.println(volumeCube(2, 4, 5));
-        even(age);
-        boom();
-        
+        getDaysOfWeek();
+        ArrayList<Integer> numbers = new ArrayList<>();
+
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        System.out.println(numbers);
+        numbers.remove(2);
+        System.out.println(numbers);
     }
 
     //This creates an object with specific attributes.
@@ -38,6 +39,13 @@ public class mainFile {
             } else {
                 System.out.println(i);
             }
+        }
+    }
+
+    public static void getDaysOfWeek() {
+        String[] days = {"Montay", "Thuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        for (int i = 0; i < days.length; i++) {
+            System.out.println("Day " + i + ": " + days[i]);
         }
     }
 
