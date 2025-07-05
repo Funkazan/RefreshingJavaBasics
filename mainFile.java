@@ -1,18 +1,36 @@
-import java.util.ArrayList;
+
+class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void introduce() {
+        System.out.println("Hello, my name is " + name + " and I am " + age + " years old.");
+    }
+}
+
+class Student extends Person {
+    String subject;
+
+    public Student(String name, int age, String subject) {
+        super(name, age);
+        this.subject = subject;
+    }
+
+    @Override
+    public void introduce() {
+        System.out.println("Hello, my name is " + name + " and I am " + age + " years old. I'm currently sutdying " + subject + ".");
+    }
+}
 
 public class mainFile {
     public static void main(String[] args) {
-        person("Volkan", 33, "B. Sc.", "Computer Sciences");
-        getDaysOfWeek();
-        ArrayList<Integer> numbers = new ArrayList<>();
-
-        numbers.add(10);
-        numbers.add(20);
-        numbers.add(30);
-        numbers.add(40);
-        System.out.println(numbers);
-        numbers.remove(2);
-        System.out.println(numbers);
+        Student p1 = new Student("Volkan", 33, "Computer Sciences");
+        p1.introduce();
     }
 
     //This creates an object with specific attributes.
