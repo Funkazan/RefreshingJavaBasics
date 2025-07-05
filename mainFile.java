@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 class Person {
     String name;
@@ -51,8 +52,13 @@ public class mainFile {
     public static void main(String[] args) {
         Student p1 = new Student("Volkan", 33, "Computer Sciences");
         p1.introduce();
-        Animal a1 = new Cat();
-        a1.sound();
+        ArrayList<Animal> pet = new ArrayList<>();
+        pet.add(new Cat());
+        pet.add(new Dog());
+
+        for (Animal a : pet) {
+            a.sound();
+        }
     }
 
     //This creates an object with specific attributes.
