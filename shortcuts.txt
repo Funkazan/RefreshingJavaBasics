@@ -1,0 +1,5 @@
+Terminal öffnen / schließen	    Strg + ` (Backtick)
+In Terminal wechseln	        Strg + ö
+Zurück zum Editor	            Strg + 1
+Explorer öffnen (linkes Menü)	Strg + Shift + E
+Neue Datei erstellen	        Strg + N

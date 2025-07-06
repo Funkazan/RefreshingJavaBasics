@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -86,10 +87,18 @@ public class mainFile {
         }
         input.close();
 
-        Student p1 = new Student("Volkan", 33, "Computer Sciences");
-        ArrayList<Animal> pet = new ArrayList<>();
         try {
-            BufferedReader r = new BufferedReader(new FileReader("text.txt"));
+            FileWriter writer = new FileWriter("num.txt");
+            writer.write("8\n");
+            writer.write("4\n");
+            writer.close();
+            System.out.println("Data has been saved!");
+        } catch (IOException e) {
+            System.err.println("Failed to write the data: " + e.getMessage());
+        }
+        
+        try {
+            BufferedReader r = new BufferedReader(new FileReader("num.txt"));
             int l1 = Integer.parseInt(r.readLine());
             int l2 = Integer.parseInt(r.readLine());
             int result = l1 / l2;
