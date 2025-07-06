@@ -1,10 +1,8 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -38,7 +36,7 @@ public class Main {
         }
 
         if (!loggedIn) {
-            System.err.println("failed to login: content can't be shown to you!");
+            System.err.println("failed to login: you don't have access to the phonebook!");
         } else {
             //reading and loading  members
             try {
@@ -56,63 +54,81 @@ public class Main {
             }
 
             //Enter new members
-            System.out.println("Enter the name and phone number of the new member or 'q' to quit:");
             while (true) {
-                System.out.println("New member name: ");
-                String name = input.nextLine().trim();
-                if (name.equalsIgnoreCase("q")) {
+                System.out.println("\n---MENÜ---");
+                System.out.println("1. add new member");
+                System.out.println("2. edit member");
+                System.out.println("3. remove member");
+                System.out.println("4. show member");
+                System.out.println("5. save & quit");
+                System.out.println("Choice: ");
+
+                String choice = input.nextLine().trim();
+
+                switch (choice) {
+                case "1":
+                    while (true) {
+                        System.out.println("Name: ");
+                        String name = input.nextLine().trim();
+                        if (name.equalsIgnoreCase("q")) {
+                            break;
+                        }
+                        if (name.isEmpty()) {
+                            System.err.println("Name can't be empty!");
+                        }       
+                        System.out.println("Phone Number: ");
+                        String phone = input.nextLine().trim();
+                        if (phone.isEmpty()) {
+                            System.err.println("Phone Number can't be empty!");
+                        }
+                        members.put(name, phone);
+                        System.out.println("Member added!");
+                    }
                     break;
+                case "2":
+                    System.out.println("Which member will be edited?");
+                    String editName = input.nextLine().trim();
+                    if (members.containsKey(editName)) {
+                        System.out.println("Current Number: " + members.get(editName));
+                        System.out.println("New Number: ");
+                        String newPhone = input.nextLine().trim();
+                        members.put(editName, newPhone);
+                        System.out.println("Number Updated!");
+                    } else {
+                        System.err.println("Member not found!");
+                    }
+                    break;
+                case "3":
+                    System.out.println("Which member will be removed?");
+                    String removeName = input.nextLine().trim();
+                    if (members.containsKey(removeName)) {
+                        members.remove(removeName);
+                        System.out.println("Member removed!");
+                    } else {
+                        System.err.println("Member not found!");
+                    }
+                    break;
+                case "4":
+                    System.out.println("\nCurrent Members: ");
+                    for (String n : members.keySet()) {
+                        System.out.println(n + " - " + members.get(n));
+                    }
+                    break;
+                case "5":
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"))){
+                        for (String n : members.keySet()) {
+                            writer.write(n + ":" + members.get(n));
+                            writer.newLine();
+                        }
+                        System.out.println("Data saved successfully, shutting down now!");
+                    } catch (IOException e) {
+                        System.err.println("Sorry, something went wrong." + e.getMessage());
+                    }
+                    return;
+                default:
+                    System.err.println("Your choice is not valid.");
                 }
-
-                if (name.isEmpty()) {
-                    System.err.println("Name can't be empty!");
-                    continue;
-                }
-
-                System.out.println("Phone number: ");
-                String number = input.nextLine().trim();
-
-                if (number.isEmpty()) {
-                    System.err.println("Phone number can't be empty!");
-                    continue;                    
-                }
-                members.put(name, number);
             }
-
-            //write the new members into file
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"));
-                for (String name : members.keySet()) {
-                    writer.write(name + ":" + members.get(name));
-                    writer.newLine();
-                }
-                writer.close();
-                System.out.println("Data has been saved!");
-            } catch (IOException e) {
-                System.err.println("Failed to write the data: " + e.getMessage());
-            }
-
-            //write out all members
-            System.out.println("\nCurrent members:");
-            for (String name : members.keySet()) {
-                System.out.println(name + ":" + members.get(name));
-            }
-
-            //search for phone number
-            System.out.println("\nSearch phone number for which member?");
-            String search = input.nextLine().trim();
-            if (members.containsKey(search)) {
-                System.out.println(search + "'s phone number: " + members.get(search));
-            } else {
-                System.err.println("Member not found.");
-            }
-            input.close();
-            
         }
-
-
-
-        //if you want to use one of the methods from utils package, use the space from here on
-        
     }
 }
