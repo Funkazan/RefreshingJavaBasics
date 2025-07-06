@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.Console;
 
@@ -37,8 +38,6 @@ public class Main {
 
         HashMap<String, String> members = new HashMap<>();
 
-
-        
         try{
             LoginSystem.login(user, pass);
             loggedIn = true;
@@ -86,7 +85,7 @@ public class Main {
                         }
                         if (name.isEmpty()) {
                             System.err.println("Name can't be empty!");
-                        }       
+                        }
                         System.out.println("Phone Number: ");
                         String phone = input.nextLine().trim();
                         if (phone.isEmpty()) {
@@ -121,9 +120,18 @@ public class Main {
                     break;
                 case "4":
                     System.out.println("\nCurrent Members: ");
+                    /* FOR-LOOP
                     for (String n : members.keySet()) {
                         System.out.println(n + " - " + members.get(n));
                     }
+                    */
+                    members.forEach((name, number) -> System.out.println(name + " - " + number)); // LAMBDA
+                    /* STREAM
+                     members.entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> System.out.println(entry.getKey() + " - " + entry.getValue()));
+                     */
+                    
                     break;
                 case "5":
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"))){
