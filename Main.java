@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import exceptions.LoginFailedException;
 import security.LoginSystem;
-import utils.Tools;
 
 
 
@@ -24,6 +24,9 @@ public class Main {
         String pass = input.nextLine();
 
         boolean loggedIn = false;
+
+        ArrayList<String> members = new ArrayList<>();
+
         
         try{
             LoginSystem.login(user, pass);
@@ -36,66 +39,58 @@ public class Main {
         if (!loggedIn) {
             System.err.println("failed to login: content can't be shown to you!");
         } else {
+            //reading and loading  members
             try {
-            FileWriter writer = new FileWriter("num.txt"); //to append add ", true"
-            writer.write("8\n");
-            writer.write("4\n");
-            writer.close();
-            System.out.println("Data has been saved!");
+                BufferedReader reader = new BufferedReader(new FileReader("members.txt"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    members.add(line);
+                }
             } catch (IOException e) {
-                System.err.println("Failed to write the data: " + e.getMessage());
-            }
-            
-            try {
-                BufferedReader r = new BufferedReader(new FileReader("num.txt"));
-                int l1 = Integer.parseInt(r.readLine());
-                int l2 = Integer.parseInt(r.readLine());
-                int result = l1 / l2;
-                System.out.println("Result: " + result);
-                r.close();
-            } catch (FileNotFoundException e) {
-                System.err.println("the data could not be found!");
-            } catch (ArithmeticException e) {
-                System.err.println("Error: division with 0 is not allowed!");  
-            } catch (IOException e) {
-                System.err.println("failed to read the data: " + e.getMessage());
-            } catch (NumberFormatException e) {
-                System.err.println("Error: the data doesn't have valid number.");
+                System.err.println("no existing members found, starting fresh.");
             }
 
+            //Enter new members
+            System.out.println("Enter the name of the new member or 'q' to quit:");
+            while (true) {
+                System.out.println("New member name: ");
+                String newMember = input.nextLine().trim();
+
+                if (newMember.equalsIgnoreCase("q")) {
+                    break;
+                }
+
+                if (!newMember.isEmpty()) {
+                    members.add(newMember);
+                } else {
+                    System.err.println("Name can't be empty!");
+                }
+            }
+
+            //write the new members into file
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"));
-                writer.write("Volkan: Hello Lisa, how was your day?");
-                writer.newLine();
-                writer.write("Lisa: It was weird. I saw breeding butterflys! >.<");
-                writer.newLine();
-                writer.close();
+                BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"));
+                for (String member : members) {
+                    writer.write(member);
+                    writer.newLine();
+                }
                 System.out.println("Data has been saved!");
             } catch (IOException e) {
                 System.err.println("Failed to write the data: " + e.getMessage());
             }
 
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader("log.txt"));
-                System.out.println(reader.readLine());
-                System.out.println(reader.readLine());
-                reader.close();
-            } catch (FileNotFoundException e) {
-                System.err.println("the data could not be found!");
-            } catch (ArithmeticException e) {
-                System.err.println("Error: division with 0 is not allowed!");  
-            } catch (IOException e) {
-                System.err.println("failed to read the data: " + e.getMessage());
-            } catch (NumberFormatException e) {
-                System.err.println("Error: the data doesn't have valid number.");
+            //write out all members
+            System.out.println("\nCurrent members:");
+            for (String member : members) {
+                System.out.println(member);
             }
+            input.close();
+            
         }
 
 
 
         //if you want to use one of the methods from utils package, use the space from here on
-        Tools.boom();
-        Tools.even(42);
-        Tools.getDaysOfWeek();
+        
     }
 }
