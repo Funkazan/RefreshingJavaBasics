@@ -34,7 +34,6 @@ public class Main {
         } catch (LoginFailedException e) {
             System.out.println("failed to login: " + e.getMessage());
         }
-        input.close();
 
         if (!loggedIn) {
             System.err.println("failed to login: content can't be shown to you!");
@@ -46,6 +45,7 @@ public class Main {
                 while ((line = reader.readLine()) != null) {
                     members.add(line);
                 }
+                reader.close();
             } catch (IOException e) {
                 System.err.println("no existing members found, starting fresh.");
             }
@@ -74,6 +74,7 @@ public class Main {
                     writer.write(member);
                     writer.newLine();
                 }
+                writer.close();
                 System.out.println("Data has been saved!");
             } catch (IOException e) {
                 System.err.println("Failed to write the data: " + e.getMessage());
