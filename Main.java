@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.Console;
 
 import exceptions.LoginFailedException;
 import security.LoginSystem;
@@ -17,11 +18,21 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Username: ");
-        String user = input.nextLine();
-        System.out.println("Password: ");
-        String pass = input.nextLine();
-
+        Console console = System.console();
+        String user;
+        String pass;
+        if (console != null) {
+            user = console.readLine("Username: ");
+            char[] passwordChars = console.readPassword("Password: ");
+            pass = new String(passwordChars);
+        } else {
+            
+            System.out.println("Username: ");
+            user = input.nextLine();
+            System.out.println("Password: ");
+            pass = input.nextLine();
+        }
+        
         boolean loggedIn = false;
 
         HashMap<String, String> members = new HashMap<>();
