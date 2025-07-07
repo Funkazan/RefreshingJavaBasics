@@ -48,6 +48,14 @@ public class Main {
                                  .reduce(0.0, (total, n) -> total + n);
         System.out.println("The sum of the grades: " + sumGrades);
 
+        List<String> words = Arrays.asList("apple", "banana", "cat", "dog", "elephant");
+
+        List<String> processedWords = words.stream()
+                                           .filter(s -> s.startsWith("a"))
+                                           .map(String::toUpperCase) 
+                                           .collect(Collectors.toList());
+        System.out.println("processed words: " + processedWords); 
+
         boolean loggedIn = false;
 
         HashMap<String, String> members = new HashMap<>();
