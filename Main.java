@@ -43,6 +43,10 @@ public class Main {
                                     .filter(n -> n >= 4.0)
                                     .collect(Collectors.toList());
         System.out.println("Grades of 4.0 or below: " + filterGrades);
+        Double sumGrades = grades.stream()
+                                 .filter(n -> n >= 4.0)
+                                 .reduce(0.0, (total, n) -> total + n);
+        System.out.println("The sum of the grades: " + sumGrades);
 
         boolean loggedIn = false;
 
