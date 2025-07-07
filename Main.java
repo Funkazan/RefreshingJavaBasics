@@ -3,9 +3,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.io.Console;
 
 import exceptions.LoginFailedException;
@@ -34,6 +37,13 @@ public class Main {
             pass = input.nextLine();
         }
         
+        List<Double> grades = Arrays.asList(3.5, 4.0, 2.8, 5.0, 3.2);
+
+        List<Double> filterGrades = grades.stream()
+                                    .filter(n -> n >= 4.0)
+                                    .collect(Collectors.toList());
+        System.out.println("Grades of 4.0 or below: " + filterGrades);
+
         boolean loggedIn = false;
 
         HashMap<String, String> members = new HashMap<>();
