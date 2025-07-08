@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidAgeException;
+
 public class Person {
     String name;
     int age;
@@ -7,6 +9,13 @@ public class Person {
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public int setAge(int age) throws InvalidAgeException{
+        if (age <= 0) {
+            System.err.println("Age can't be negative or 0!");
+        }
+        return age;
     }
 
     public void introduce() {
