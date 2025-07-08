@@ -3,17 +3,17 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+
+import enums.Days;
+import app.TaskProcessor;
+import annotations.*;
+
 import java.io.Console;
 
 import exceptions.LoginFailedException;
-import model.Person;
 import security.LoginSystem;
 
 
@@ -37,6 +37,27 @@ public class Main {
             user = input.nextLine();
             System.out.println("Password: ");
             pass = input.nextLine();
+        }
+
+        // ... (Dein bereits vorhandener Code bleibt hier) ...
+
+        System.out.println("\n--- Aufgabenstatus auslesen (Reflection) ---");
+        // Erhalte die Klasse TaskProcessor
+        Class<TaskProcessor> taskProcessorClass = TaskProcessor.class;
+
+        // Iteriere über alle Methoden der Klasse
+        for (Method method : taskProcessorClass.getDeclaredMethods()) {
+            // Prüfe, ob die Methode mit unserer TaskStatus Annotation annotiert ist
+            if (method.isAnnotationPresent(TaskStatus.class)) {
+                // Wenn ja, hole die Annotation-Instanz
+                TaskStatus taskStatus = method.getAnnotation(TaskStatus.class);
+
+                System.out.println("Methode: " + method.getName());
+                System.out.println("  Zuständig: " + taskStatus.assignedTo());
+                System.out.println("  Status: " + taskStatus.status());
+                System.out.println("  Geschätzte Stunden: " + taskStatus.estimatedHours());
+                System.out.println("--------------------");
+            }
         }
 
         boolean loggedIn = false;
