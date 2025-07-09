@@ -10,18 +10,18 @@ public enum Days {
     SATURDAY("Samstag", "Saturday", "Cumartesi"),
     SUNDAY("Sonntag", "Sunday", "Pazar");
 
-    private final String deutscheBezeichnung;
+    private final String germanName;
     private final String englishName;
     private final String turkishName;
 
-    Days(String deutscheBezeichnung, String englishName, String turkishName) {
-        this.deutscheBezeichnung = deutscheBezeichnung;
+    Days(String germanName, String englishName, String turkishName) {
+        this.germanName = germanName;
         this.englishName = englishName;
         this.turkishName = turkishName;
     }
 
     public String getDeutscheBezeichnung() {
-        return deutscheBezeichnung;
+        return germanName;
     }
 
     public String getEnglishName() {
