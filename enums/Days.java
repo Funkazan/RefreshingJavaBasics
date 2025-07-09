@@ -2,20 +2,22 @@ package enums;
 
 
 public enum Days {
-    MONDAY("Montag", "Monday"),
-    TUESTAY("Dienstag", "Tuesday"),
-    WEDNESDAY("Mittwoch", "Wednesday"),
-    THURSTAY("Donnerstag", "Thursday"),
-    FRIDAY("Freitag", "Friday"),
-    SATURDAY("Samstag", "Saturday"),
-    SUNDAY("Sonntag", "Sunday");
+    MONDAY("Montag", "Monday", "Pazartesi"),
+    TUESTAY("Dienstag", "Tuesday", "Salı"),
+    WEDNESDAY("Mittwoch", "Wednesday", "Çarşamba"),
+    THURSTAY("Donnerstag", "Thursday", "Perşembe"),
+    FRIDAY("Freitag", "Friday", "Cuma"),
+    SATURDAY("Samstag", "Saturday", "Cumartesi"),
+    SUNDAY("Sonntag", "Sunday", "Pazar");
 
     private final String deutscheBezeichnung;
     private final String englishName;
+    private final String turkishName;
 
-    Days(String deutscheBezeichnung, String englishName) {
+    Days(String deutscheBezeichnung, String englishName, String turkishName) {
         this.deutscheBezeichnung = deutscheBezeichnung;
         this.englishName = englishName;
+        this.turkishName = turkishName;
     }
 
     public String getDeutscheBezeichnung() {
@@ -24,5 +26,9 @@ public enum Days {
 
     public String getEnglishName() {
         return englishName;
+    }
+
+    public String getTurkishName() {
+        return turkishName;
     }
 }
