@@ -1,72 +1,70 @@
-package com.basics;
+// src/test/java/com/yourcompany/myproject/CalculatorTest.java
+package com.basics; // Wichtig: Gleiches Package wie die zu testende Klasse
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*; // Für Assertions wie assertEquals
 
-import org.junit.Test;
+public class AppTest {
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    private App app;
+    private App calculator; // Die Instanz der zu testenden Klasse
 
-    //@BeforeEach: eun before every testMethod
+    // @BeforeEach: Wird vor jeder Testmethode ausgeführt.
     @BeforeEach
     void setUp() {
-        app = new App();
+        calculator = new App(); // Initialisiere den Taschenrechner vor jedem Test
     }
 
-    //@Test: marks a method as testmethod
+    // @Test: Markiert eine Methode als Testmethode
     @Test
-    @DisplayName("should add two positive numbers correctly")
+    @DisplayName("Sollte zwei positive Zahlen korrekt addieren") // Optionaler Anzeigename
     void add_ShouldAddTwoPositiveNumbers() {
-        int result = app.add(2, 3);
-        assertEquals(5, result, "2 + 3 should be 5");
+        int result = calculator.add(2, 3);
+        assertEquals(5, result, "2 + 3 sollte 5 ergeben."); // Erwarteter Wert, tatsächlicher Wert, Fehlermeldung
     }
 
     @Test
-    @DisplayName("should add two negative numbers correctly")
+    @DisplayName("Sollte zwei negative Zahlen korrekt addieren")
     void add_ShouldAddTwoNegativeNumbers() {
-        int result = app.add(-2, -3);
+        int result = calculator.add(-2, -3);
         assertEquals(-5, result);
     }
 
     @Test
-    @DisplayName("should add zero correctly")
+    @DisplayName("Sollte Null korrekt addieren")
     void add_ShouldAddZero() {
-        int result = app.add(5, 0);
+        int result = calculator.add(5, 0);
         assertEquals(5, result);
     }
 
     @Test
-    @DisplayName("should perform subtraction correctly")
+    @DisplayName("Sollte Subtraktion korrekt durchführen")
     void subtract_ShouldSubtractCorrectly() {
-        int result = app.subtract(10, 4);
+        int result = calculator.subtract(10, 4);
         assertEquals(6, result);
     }
 
     @Test
-    @DisplayName("should perform multiplication correctly")
+    @DisplayName("Sollte Multiplikation korrekt durchführen")
     void multiply_ShouldMultiplyCorrectly() {
-        int result = app.multiply(3, 4);
+        int result = calculator.multiply(3, 4);
         assertEquals(12, result);
     }
 
     @Test
-    @DisplayName("should perform division correctly")
+    @DisplayName("Sollte Division korrekt durchführen")
     void divide_ShouldDivideCorrectly() {
-        double result = app.divide(10, 2);
+        double result = calculator.divide(10, 2);
         assertEquals(5.0, result, 0.001); // Dritter Parameter für Gleitkomma-Genauigkeit
     }
 
     @Test
-    @DisplayName("should throw IllegalArgumentException if divided by zero")
+    @DisplayName("Sollte IllegalArgumentException bei Division durch Null werfen")
     void divide_ShouldThrowExceptionWhenDividingByZero() {
         // assertThrows überprüft, ob die angegebene Exception geworfen wird
         assertThrows(IllegalArgumentException.class, () -> {
-            app.divide(10, 0);
-        }, "division with zero should trigger IllegalArgumentException");
+            calculator.divide(10, 0);
+        }, "Division durch Null sollte eine IllegalArgumentException auslösen.");
     }
 }
