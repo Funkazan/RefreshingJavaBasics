@@ -30,7 +30,7 @@ public class Tools {
     }
 
     public static void getDaysOfWeek() {
-        String[] days = {"Montay", "Thuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        String[] days = {"Monday", "Thusday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (int i = 0; i < days.length; i++) {
             System.out.println("Day " + i + ": " + days[i]);
         }
