@@ -1,3 +1,4 @@
+package trial;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -7,6 +8,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.basics.security.LoginSystem;
+
 import enums.Days;
 import app.TaskProcessor;
 import annotations.*;
@@ -14,7 +17,6 @@ import annotations.*;
 import java.io.Console;
 
 import exceptions.LoginFailedException;
-import security.LoginSystem;
 
 
 
