@@ -3,8 +3,8 @@ package model;
 import exceptions.InvalidAgeException;
 
 public class Person {
-    String name;
-    int age;
+    protected String name;
+    protected int age;
 
     public Person(String name, int age) {
         this.name = name;
@@ -15,6 +15,14 @@ public class Person {
         if (age <= 0) {
             System.err.println("Age can't be negative or 0!");
         }
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
         return age;
     }
 

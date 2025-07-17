@@ -48,5 +48,24 @@ public class StudentTest {
         assertEquals("Physics", student.getSubject(), "getSubject should return 'Physics'");
     }
 
-    
+    // --- to test the introduce()-method (System.out.println Output)
+    @Test
+    @DisplayName("introduce() should print out the correct message")
+    void introduce_ShouldPrintCorrectIntroduction() {
+        Student student = new Student("Clara", 21, "Mathematics");
+        student.introduce(); // calls the method, which should access the System.out.println
+
+        String expectedOutput = "Hello, my name is Clara and I am 21 years old. I'm currently studying Mathematics." + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString(), "the message should be correct");
+    }
+
+    @Test
+    @DisplayName("introduce() should print out different student data correctly")
+    void introduce_ShouldHandleDifferentStudentData() {
+        Student student = new Student("David", 19, "Art History");
+        student.introduce();
+
+        String expectedOutput = "Hello, my name is David and I am 19 years old. I'm currently studying Art History." + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString(), "The message should be correct.");
+    }
 }
