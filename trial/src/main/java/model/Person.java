@@ -8,14 +8,20 @@ public class Person {
 
     public Person(String name, int age) {
         this.name = name;
-        this.age = age;
+        try {
+            this.setAge(age);
+        } catch (InvalidAgeException e) {
+            this.age = 0;
+            System.err.println("Initial age invalod for " + name + ": " + e.getMessage());
+        }
+        
     }
 
-    public int setAge(int age) throws InvalidAgeException{
+    public void setAge(int age) throws InvalidAgeException{
         if (age <= 0) {
-            System.err.println("Age can't be negative or 0!");
+            throw new InvalidAgeException("Age can't be negative or 0! Provided: " + age);
         }
-        return age;
+        this.age = age;
     }
 
     public String getName() {

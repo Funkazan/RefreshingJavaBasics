@@ -1,9 +1,10 @@
 // src/test/java/com/yourcompany/myproject/CalculatorTest.java
-package com.basics; // Wichtig: Gleiches Package wie die zu testende Klasse
+package app; // Wichtig: Gleiches Package wie die zu testende Klasse
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*; // Für Assertions wie assertEquals
 
 public class AppTest {

@@ -1,4 +1,4 @@
-package com.basics;
+package app;
 
 
 public class App 
