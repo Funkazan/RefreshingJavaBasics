@@ -1,11 +1,9 @@
 // src/test/java/utils/ToolsTest.java
-package com.basics; // Gleiches Package wie die zu testende Klasse
+package utils; // Gleiches Package wie die zu testende Klasse
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import utils.Tools;
 
 import static org.junit.jupiter.api.Assertions.*; // Für Assertions
 
