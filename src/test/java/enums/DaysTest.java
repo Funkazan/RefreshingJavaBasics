@@ -98,8 +98,13 @@ public class DaysTest {
     @Test
     @DisplayName("valueOf-Method should return Enum-Constant correctly")
     void valueOf_ShouldReturnCorrectEnumConstant() {
+        assertEquals(Days.MONDAY, Days.valueOf("MONDAY"), "valueOf should return MONDAY.");
+        assertEquals(Days.TUESDAY, Days.valueOf("TUESDAY"), "valueOf should return TUESDAY.");
         assertEquals(Days.WEDNESDAY, Days.valueOf("WEDNESDAY"), "valueOf should return WEDNESDAY.");
+        assertEquals(Days.THURSDAY, Days.valueOf("THURSDAY"), "valueOf should return THURSDAY.");
+        assertEquals(Days.FRIDAY, Days.valueOf("FRIDAY"), "valueOf should return FRIDAY.");
         assertEquals(Days.SATURDAY, Days.valueOf("SATURDAY"), "valueOf should return SATURDAY.");
+        assertEquals(Days.SUNDAY, Days.valueOf("SUNDAY"), "valueOf should return SUNDAY.");
     }
 
     @Test
