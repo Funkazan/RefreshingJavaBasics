@@ -65,9 +65,18 @@ public class DaysTest {
     @Test
     @DisplayName("all Enum-Values should be initialized correctly")
     void allDays_ShouldHaveCorrectNames() {
+
+        assertEquals("Montag", Days.MONDAY.getDeutscheBezeichnung());
+        assertEquals("Monday", Days.MONDAY.getEnglishName());
+        assertEquals("Pazartesi", Days.MONDAY.getTurkishName());
+
         assertEquals("Dienstag", Days.TUESDAY.getDeutscheBezeichnung());
         assertEquals("Tuesday", Days.TUESDAY.getEnglishName());
         assertEquals("Salı", Days.TUESDAY.getTurkishName());
+
+        assertEquals("Mittwoch", Days.WEDNESDAY.getDeutscheBezeichnung());
+        assertEquals("Wednesday", Days.WEDNESDAY.getEnglishName());
+        assertEquals("Çarşamba", Days.WEDNESDAY.getTurkishName());
 
         assertEquals("Donnerstag", Days.THURSDAY.getDeutscheBezeichnung());
         assertEquals("Thursday", Days.THURSDAY.getEnglishName());
@@ -76,6 +85,14 @@ public class DaysTest {
         assertEquals("Freitag", Days.FRIDAY.getDeutscheBezeichnung());
         assertEquals("Friday", Days.FRIDAY.getEnglishName());
         assertEquals("Cuma", Days.FRIDAY.getTurkishName());
+
+        assertEquals("Samstag", Days.SATURDAY.getDeutscheBezeichnung());
+        assertEquals("Saturday", Days.SATURDAY.getEnglishName());
+        assertEquals("Cumartesi", Days.SATURDAY.getTurkishName());
+
+        assertEquals("Sonntag", Days.SUNDAY.getDeutscheBezeichnung());
+        assertEquals("Sunday", Days.SUNDAY.getEnglishName());
+        assertEquals("Pazar", Days.SUNDAY.getTurkishName());
     }
 
     @Test
