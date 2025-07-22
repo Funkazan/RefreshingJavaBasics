@@ -114,7 +114,25 @@ public class DaysTest {
                      () -> Days.valueOf("INVALID_DAY"),
                      "valueOf should throw IllegalArgumentException for invalid names.");
         assertThrows(IllegalArgumentException.class,
-                     () -> Days.valueOf("monday"), // Namen sind case-sensitive!
+                     () -> Days.valueOf("monday"),
+                     "valueOf should throw IllegalArgumentException for lower case.");
+        assertThrows(IllegalArgumentException.class,
+                     () -> Days.valueOf("tuesday"),
+                     "valueOf should throw IllegalArgumentException for invalid names.");
+        assertThrows(IllegalArgumentException.class,
+                     () -> Days.valueOf("wednesday"),
+                     "valueOf should throw IllegalArgumentException for lower case.");
+        assertThrows(IllegalArgumentException.class,
+                     () -> Days.valueOf("thursday"),
+                     "valueOf should throw IllegalArgumentException for invalid names.");
+        assertThrows(IllegalArgumentException.class,
+                     () -> Days.valueOf("friday"),
+                     "valueOf should throw IllegalArgumentException for lower case.");
+        assertThrows(IllegalArgumentException.class,
+                     () -> Days.valueOf("saturday"),
+                     "valueOf should throw IllegalArgumentException for invalid names.");
+        assertThrows(IllegalArgumentException.class,
+                     () -> Days.valueOf("sunday"),
                      "valueOf should throw IllegalArgumentException for lower case.");
     }
 
