@@ -1,4 +1,3 @@
-// app/TaskProcessor.java
 package app;
 
 import annotations.TaskStatus;
@@ -6,21 +5,22 @@ import enums.Status;
 
 public class TaskProcessor {
 
-    @TaskStatus(assignedTo = "Alice", status = Status.TODO, estimatedHours = 5)
-    public void initializeDatabase() {
-        System.out.println("Datenbank wird initialisiert...");
-        // Logik zur Datenbankinitialisierung
+    @TaskStatus(assignedTo = "Alice", status = (String) "IN_PROGRESS", estimatedHours = 8)
+    public void processData() {
+        // Logik zur Datenverarbeitung
     }
 
-    @TaskStatus(assignedTo = "Bob", status = Status.IN_PROGRESS) // estimatedHours nutzt den Standardwert
-    public void processUserData() {
-        System.out.println("Benutzerdaten werden verarbeitet...");
-        // Logik zur Benutzerdatenverarbeitung
-    }
-
-    @TaskStatus(assignedTo = "Alice", status = Status.DONE, estimatedHours = 3)
+    @TaskStatus(assignedTo = "Bob", status = "DONE", estimatedHours = 4)
     public void generateReport() {
-        System.out.println("Bericht wird generiert...");
-        // Logik zur Berichterstellung
+        // Logik zur Berichtsgenerierung
+    }
+
+    public void utilityMethod() {
+        // Eine normale Methode ohne Annotation
+    }
+
+    @TaskStatus(assignedTo = "Charlie", status = "TODO", estimatedHours = 12)
+    private void internalCalculation() {
+        // Private Methode, die auch eine Annotation haben kann
     }
 }

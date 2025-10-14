@@ -1,58 +1,63 @@
-package com.basics;
+package com.basics; // Dein gewähltes Paket für Main
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.Console; // Für passwort-Eingabe ohne Echo
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Scanner;
 
-import app.TaskProcessor;
-import annotations.*;
-
-import java.io.Console;
-
+import security.LoginSystem; // Für das Login
 import exceptions.LoginFailedException;
-import security.LoginSystem;
-
-
-
-
+import app.TaskProcessor;     // Für die Reflection-Demo
+import annotations.TaskStatus; // Für die Reflection-Demo
+import phonebook.PhonebookManager; // NEU: Für die Telefonbuch-Logik
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); // Verwende einen einzigen Scanner
         Console console = System.console();
-        String user;
-        String pass;
+
+        System.out.println("--- Willkommen beim Anwendungs-Demo-Programm! ---");
+        System.out.println("-------------------------------------------------");
+
+        // --- 1. Login-Funktion ---
+        System.out.println("\n--- 1. Login ---");
+        String username;
+        String password;
+
         if (console != null) {
-            user = console.readLine("Username: ");
-            char[] passwordChars = console.readPassword("Password: ");
-            pass = new String(passwordChars);
+            username = console.readLine("Benutzername: ");
+            char[] passwordChars = console.readPassword("Passwort: ");
+            password = new String(passwordChars);
         } else {
-            
-            System.out.println("Username: ");
-            user = input.nextLine();
-            System.out.println("Password: ");
-            pass = input.nextLine();
+            System.out.print("Benutzername: ");
+            username = scanner.nextLine();
+            System.out.print("Passwort: ");
+            password = scanner.nextLine();
         }
 
-        // ... (Dein bereits vorhandener Code bleibt hier) ...
+       // LoginSystem loginSystem = new LoginSystem(); // Instanziere dein LoginSystem
+        boolean loggedIn = false;
+        try {
+            LoginSystem.login(username, password); // Nutze die Login-Methode aus LoginSystem
+            loggedIn = true;
+            System.out.println("Anmeldung erfolgreich!");
+        } catch (LoginFailedException e) {
+            System.err.println("Anmeldung fehlgeschlagen: " + e.getMessage());
+        }
 
-        System.out.println("\n--- Aufgabenstatus auslesen (Reflection) ---");
-        // Erhalte die Klasse TaskProcessor
+        if (!loggedIn) {
+            System.err.println("Zugriff auf das Telefonbuch verweigert.");
+            scanner.close(); // Scanner schließen, da Programm endet
+            return; // Beende das Programm, wenn Login fehlschlägt
+        }
+
+        // --- 2. Reflection-Demo (Unabhängig vom Login) ---
+        System.out.println("\n--- 2. Aufgabenstatus auslesen (Reflection) ---");
         Class<TaskProcessor> taskProcessorClass = TaskProcessor.class;
-
-        // Iteriere über alle Methoden der Klasse
         for (Method method : taskProcessorClass.getDeclaredMethods()) {
-            // Prüfe, ob die Methode mit unserer TaskStatus Annotation annotiert ist
             if (method.isAnnotationPresent(TaskStatus.class)) {
-                // Wenn ja, hole die Annotation-Instanz
                 TaskStatus taskStatus = method.getAnnotation(TaskStatus.class);
-
                 System.out.println("Methode: " + method.getName());
                 System.out.println("  Zuständig: " + taskStatus.assignedTo());
                 System.out.println("  Status: " + taskStatus.status());
@@ -61,119 +66,51 @@ public class Main {
             }
         }
 
-        boolean loggedIn = false;
+        // --- 3. Telefonbuch-Verwaltung ---
+        System.out.println("\n--- 3. Telefonbuch-Verwaltung ---");
+        PhonebookManager phonebookManager = new PhonebookManager(); // Instanziere den PhonebookManager
 
-        HashMap<String, String> members = new HashMap<>();
+        while (true) {
+            System.out.println("\n--- MENÜ ---");
+            System.out.println("1. Mitglied hinzufügen");
+            System.out.println("2. Mitglied bearbeiten");
+            System.out.println("3. Mitglied entfernen");
+            System.out.println("4. Mitglieder anzeigen");
+            System.out.println("5. Speichern & Beenden");
+            System.out.print("Wahl: ");
 
-        try{
-            LoginSystem.login(user, pass);
-            loggedIn = true;
-        } catch (LoginFailedException e) {
-            System.out.println("failed to login: " + e.getMessage());
-        }
+            String choice = scanner.nextLine().trim();
 
-        if (!loggedIn) {
-            System.err.println("failed to login: you don't have access to the phonebook!");
-        } else {
-            //reading and loading  members
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader("members.txt"));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.contains(":")) {
-                        String[] parts = line.split(":", 2);
-                        members.put(parts[0], parts[1]);
-                    }
-                }
-                reader.close();
-            } catch (IOException e) {
-                System.err.println("no existing members found, starting fresh.");
-            }
-
-            //Enter new members
-            while (true) {
-                System.out.println("\n---MENÜ---");
-                System.out.println("1. add new member");
-                System.out.println("2. edit member");
-                System.out.println("3. remove member");
-                System.out.println("4. show member");
-                System.out.println("5. save & quit");
-                System.out.println("Choice: ");
-
-                String choice = input.nextLine().trim();
-
-                switch (choice) {
+            switch (choice) {
                 case "1":
-                    while (true) {
-                        System.out.println("Name: ");
-                        String name = input.nextLine().trim();
-                        if (name.equalsIgnoreCase("q")) {
-                            break;
-                        }
-                        if (name.isEmpty()) {
-                            System.err.println("Name can't be empty!");
-                        }
-                        System.out.println("Phone Number: ");
-                        String phone = input.nextLine().trim();
-                        if (phone.isEmpty()) {
-                            System.err.println("Phone Number can't be empty!");
-                        }
-                        members.put(name, phone);
-                        System.out.println("Member added!");
-                    }
+                    System.out.print("Name: ");
+                    String nameAdd = scanner.nextLine().trim();
+                    System.out.print("Telefonnummer: ");
+                    String phoneAdd = scanner.nextLine().trim();
+                    phonebookManager.addMember(nameAdd, phoneAdd);
                     break;
                 case "2":
-                    System.out.println("Which member will be edited?");
-                    String editName = input.nextLine().trim();
-                    if (members.containsKey(editName)) {
-                        System.out.println("Current Number: " + members.get(editName));
-                        System.out.println("New Number: ");
-                        String newPhone = input.nextLine().trim();
-                        members.put(editName, newPhone);
-                        System.out.println("Number Updated!");
-                    } else {
-                        System.err.println("Member not found!");
-                    }
+                    System.out.print("Welches Mitglied soll bearbeitet werden? (Name): ");
+                    String editName = scanner.nextLine().trim();
+                    System.out.print("Neue Telefonnummer: ");
+                    String newPhone = scanner.nextLine().trim();
+                    phonebookManager.editMember(editName, newPhone);
                     break;
                 case "3":
-                    System.out.println("Which member will be removed?");
-                    String removeName = input.nextLine().trim();
-                    if (members.containsKey(removeName)) {
-                        members.remove(removeName);
-                        System.out.println("Member removed!");
-                    } else {
-                        System.err.println("Member not found!");
-                    }
+                    System.out.print("Welches Mitglied soll entfernt werden? (Name): ");
+                    String removeName = scanner.nextLine().trim();
+                    phonebookManager.removeMember(removeName);
                     break;
                 case "4":
-                    System.out.println("\nCurrent Members: ");
-                    /* FOR-LOOP
-                    for (String n : members.keySet()) {
-                        System.out.println(n + " - " + members.get(n));
-                    }
-                    */
-                    members.forEach((name, number) -> System.out.println(name + " - " + number)); // LAMBDA
-                    /* STREAM
-                     members.entrySet().stream()
-                        .sorted(Map.Entry.comparingByKey())
-                        .forEach(entry -> System.out.println(entry.getKey() + " - " + entry.getValue()));
-                     */
-                    
+                    phonebookManager.displayMembers();
                     break;
                 case "5":
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"))){
-                        for (String n : members.keySet()) {
-                            writer.write(n + ":" + members.get(n));
-                            writer.newLine();
-                        }
-                        System.out.println("Data saved successfully, shutting down now!");
-                    } catch (IOException e) {
-                        System.err.println("Sorry, something went wrong." + e.getMessage());
-                    }
-                    return;
+                    phonebookManager.saveMembers(); // Speichere die Daten beim Beenden
+                    System.out.println("Daten gespeichert, Programm wird beendet.");
+                    scanner.close(); // Scanner schließen
+                    return; // Beende die main-Methode
                 default:
-                    System.err.println("Your choice is not valid.");
-                }
+                    System.err.println("Ungültige Auswahl.");
             }
         }
     }

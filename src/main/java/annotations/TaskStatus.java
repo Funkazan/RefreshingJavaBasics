@@ -5,12 +5,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import enums.Status;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface TaskStatus {
-    String assignedTo();
-    Status status();
+    String assignedTo() default "Unassigned";
+    String status() default "TODO";
     int estimatedHours() default 0;
 }
