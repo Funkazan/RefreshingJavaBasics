@@ -11,16 +11,21 @@ import java.util.Map; // Für Map.Entry.comparingByKey()
 public class PhonebookManager {
 
     private HashMap<String, String> members;
-    private final String FILENAME = "members.txt"; // Dateiname für das Telefonbuch
+    private final String filename;
 
     public PhonebookManager() {
+        this("phonebook.txt"); // Standard-Dateiname
+    }
+
+    public PhonebookManager(String filename) {
         this.members = new HashMap<>();
-        loadMembers(); // Lade Mitglieder beim Initialisieren
+        this.filename = filename;
+        loadMembers();
     }
 
     // Lädt Mitglieder aus der Datei
     private void loadMembers() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.contains(":")) {
@@ -30,20 +35,20 @@ public class PhonebookManager {
                     }
                 }
             }
-            System.out.println("Telefonbuch aus '" + FILENAME + "' geladen.");
+            System.out.println("Telefonbuch aus '" + filename + "' geladen.");
         } catch (IOException e) {
-            System.err.println("Kein vorhandenes Telefonbuch '" + FILENAME + "' gefunden, starte frisch.");
+            System.err.println("Kein vorhandenes Telefonbuch '" + filename + "' gefunden, starte frisch.");
         }
     }
 
     // Speichert Mitglieder in die Datei
     public void saveMembers() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILENAME))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Map.Entry<String, String> entry : members.entrySet()) {
                 writer.write(entry.getKey() + ":" + entry.getValue());
                 writer.newLine();
             }
-            System.out.println("Telefonbuch in '" + FILENAME + "' gespeichert.");
+            System.out.println("Telefonbuch in '" + filename + "' gespeichert.");
         } catch (IOException e) {
             System.err.println("Fehler beim Speichern des Telefonbuchs: " + e.getMessage());
         }
