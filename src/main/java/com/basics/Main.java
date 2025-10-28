@@ -1,15 +1,14 @@
-package com.basics; // Dein gewähltes Paket für Main
+package com.basics; // choosen package
 
-import java.io.Console; // Für passwort-Eingabe ohne Echo
-import java.io.IOException;
+import java.io.Console; // password input without echo
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
-import security.LoginSystem; // Für das Login
+import security.LoginSystem; // for login functionality
 import exceptions.LoginFailedException;
-import app.TaskProcessor;     // Für die Reflection-Demo
-import annotations.TaskStatus; // Für die Reflection-Demo
-import phonebook.PhonebookManager; // NEU: Für die Telefonbuch-Logik
+import app.TaskProcessor;     // for reflection demo
+import annotations.TaskStatus; // for reading annotations
+import phonebook.PhonebookManager; // NEW for phonebook management
 
 public class Main {
 
@@ -66,8 +65,8 @@ public class Main {
             }
         }
 
-        // --- 3. Telefonbuch-Verwaltung ---
-        System.out.println("\n--- 3. Phonebook-Administration ---");
+        // --- 3. Phonebook-Manager ---
+        System.out.println("\n--- 3. Phonebook-Manager ---");
         PhonebookManager phonebookManager = new PhonebookManager(); // Instanziere den PhonebookManager
 
         while (true) {
