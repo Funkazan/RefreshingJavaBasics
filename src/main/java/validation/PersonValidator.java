@@ -1,14 +1,14 @@
 // src/main/java/validation/PersonValidator.java
-package validation; // Neues Paket für Validierungslogik
+package validation; // new package for validation logic
 
-import exceptions.InvalidAgeException; // Importiere deine Custom Exception
+import exceptions.InvalidAgeException; // import the custom exception
 
 public class PersonValidator {
 
     /**
-     * Validiert das gegebene Alter.
-     * @param age Das zu validierende Alter.
-     * @throws InvalidAgeException Wenn das Alter negativ oder größer als 150 ist.
+     * validates the age of a person.
+     * @param age age to validate
+     * @throws InvalidAgeException if age is negative or greater than 150
      */
     public static void validateAge(int age) throws InvalidAgeException {
         if (age < 0) {
@@ -17,6 +17,6 @@ public class PersonValidator {
         if (age > 150) {
             throw new InvalidAgeException("Age cannot be greater than 150: " + age);
         }
-        // Alter ist gültig, mache nichts
+        // age is valid
     }
 }
