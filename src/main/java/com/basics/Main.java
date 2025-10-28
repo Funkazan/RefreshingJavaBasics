@@ -14,70 +14,70 @@ import phonebook.PhonebookManager; // NEU: Für die Telefonbuch-Logik
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); // Verwende einen einzigen Scanner
+        Scanner scanner = new Scanner(System.in); // use only one Scanner
         Console console = System.console();
 
-        System.out.println("--- Willkommen beim Anwendungs-Demo-Programm! ---");
+        System.out.println("--- Welcome to Demo-Application! ---");
         System.out.println("-------------------------------------------------");
 
-        // --- 1. Login-Funktion ---
+        // --- 1. Login-function ---
         System.out.println("\n--- 1. Login ---");
         String username;
         String password;
 
         if (console != null) {
-            username = console.readLine("Benutzername: ");
-            char[] passwordChars = console.readPassword("Passwort: ");
+            username = console.readLine("Username: ");
+            char[] passwordChars = console.readPassword("Password: ");
             password = new String(passwordChars);
         } else {
-            System.out.print("Benutzername: ");
+            System.out.print("Username: ");
             username = scanner.nextLine();
-            System.out.print("Passwort: ");
+            System.out.print("Password: ");
             password = scanner.nextLine();
         }
 
-       // LoginSystem loginSystem = new LoginSystem(); // Instanziere dein LoginSystem
+       // LoginSystem loginSystem = new LoginSystem(); // create instance if needed
         boolean loggedIn = false;
         try {
-            LoginSystem.login(username, password); // Nutze die Login-Methode aus LoginSystem
+            LoginSystem.login(username, password); // use LoginSystem from security package
             loggedIn = true;
-            System.out.println("Anmeldung erfolgreich!");
+            System.out.println("Logged In Successfully!");
         } catch (LoginFailedException e) {
-            System.err.println("Anmeldung fehlgeschlagen: " + e.getMessage());
+            System.err.println("Login failed: " + e.getMessage());
         }
 
         if (!loggedIn) {
-            System.err.println("Zugriff auf das Telefonbuch verweigert.");
-            scanner.close(); // Scanner schließen, da Programm endet
-            return; // Beende das Programm, wenn Login fehlschlägt
+            System.err.println("Access to Phonebook rejected.");
+            scanner.close(); // close scanner, app ends here
+            return; // exterminate main method if login fails
         }
 
-        // --- 2. Reflection-Demo (Unabhängig vom Login) ---
-        System.out.println("\n--- 2. Aufgabenstatus auslesen (Reflection) ---");
+        // --- 2. Reflection-Demo (independent from Login) ---
+        System.out.println("\n--- 2. Read Task Status (Reflection) ---");
         Class<TaskProcessor> taskProcessorClass = TaskProcessor.class;
         for (Method method : taskProcessorClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(TaskStatus.class)) {
                 TaskStatus taskStatus = method.getAnnotation(TaskStatus.class);
-                System.out.println("Methode: " + method.getName());
-                System.out.println("  Zuständig: " + taskStatus.assignedTo());
+                System.out.println("Method: " + method.getName());
+                System.out.println("  Responsible: " + taskStatus.assignedTo());
                 System.out.println("  Status: " + taskStatus.status());
-                System.out.println("  Geschätzte Stunden: " + taskStatus.estimatedHours());
+                System.out.println("  Estimated Time: " + taskStatus.estimatedHours());
                 System.out.println("--------------------");
             }
         }
 
         // --- 3. Telefonbuch-Verwaltung ---
-        System.out.println("\n--- 3. Telefonbuch-Verwaltung ---");
+        System.out.println("\n--- 3. Phonebook-Administration ---");
         PhonebookManager phonebookManager = new PhonebookManager(); // Instanziere den PhonebookManager
 
         while (true) {
             System.out.println("\n--- MENÜ ---");
-            System.out.println("1. Mitglied hinzufügen");
-            System.out.println("2. Mitglied bearbeiten");
-            System.out.println("3. Mitglied entfernen");
-            System.out.println("4. Mitglieder anzeigen");
-            System.out.println("5. Speichern & Beenden");
-            System.out.print("Wahl: ");
+            System.out.println("1. Add Member");
+            System.out.println("2. Edit Member");
+            System.out.println("3. Remove Member");
+            System.out.println("4. Show Members");
+            System.out.println("5. Save and Exit");
+            System.out.print("Choice: ");
 
             String choice = scanner.nextLine().trim();
 
@@ -85,19 +85,19 @@ public class Main {
                 case "1":
                     System.out.print("Name: ");
                     String nameAdd = scanner.nextLine().trim();
-                    System.out.print("Telefonnummer: ");
+                    System.out.print("Phonenumber: ");
                     String phoneAdd = scanner.nextLine().trim();
                     phonebookManager.addMember(nameAdd, phoneAdd);
                     break;
                 case "2":
-                    System.out.print("Welches Mitglied soll bearbeitet werden? (Name): ");
+                    System.out.print("Which Member should be edited? (Name): ");
                     String editName = scanner.nextLine().trim();
-                    System.out.print("Neue Telefonnummer: ");
+                    System.out.print("New Phonenumber: ");
                     String newPhone = scanner.nextLine().trim();
                     phonebookManager.editMember(editName, newPhone);
                     break;
                 case "3":
-                    System.out.print("Welches Mitglied soll entfernt werden? (Name): ");
+                    System.out.print("Which Member should be removed? (Name): ");
                     String removeName = scanner.nextLine().trim();
                     phonebookManager.removeMember(removeName);
                     break;
@@ -105,12 +105,12 @@ public class Main {
                     phonebookManager.displayMembers();
                     break;
                 case "5":
-                    phonebookManager.saveMembers(); // Speichere die Daten beim Beenden
-                    System.out.println("Daten gespeichert, Programm wird beendet.");
-                    scanner.close(); // Scanner schließen
-                    return; // Beende die main-Methode
+                    phonebookManager.saveMembers(); // Save before exit
+                    System.out.println("Data saved. Exiting application.");
+                    scanner.close(); // close Scanner
+                    return; // close application
                 default:
-                    System.err.println("Ungültige Auswahl.");
+                    System.err.println("Invalid choice. Please try again.");
             }
         }
     }
