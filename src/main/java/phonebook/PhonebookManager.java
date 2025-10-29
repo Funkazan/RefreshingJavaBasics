@@ -8,15 +8,26 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map; // for Map.Entry
 
+/**
+ * Manages a phonebook with functionalities to add, edit, remove, display, load, and save members.
+ */
 public class PhonebookManager {
 
     private HashMap<String, String> members;
     private final String filename;
 
+    /**
+     * Default constructor. Initializes the Manager and loads members from "phonebook.txt".
+     */
     public PhonebookManager() {
         this("phonebook.txt"); // default filename
     }
 
+    /**
+     * Constructor with custom filename.
+     * Mainly for testing purposes.
+     * @param filename the file to load/save the phonebook
+     */
     public PhonebookManager(String filename) {
         this.members = new HashMap<>();
         this.filename = filename;
@@ -54,7 +65,12 @@ public class PhonebookManager {
         }
     }
 
-    // adds a new entry
+    /**
+     * adds a new member to the phonebook.
+     * @param name The name of the new member. Is not allowed to be null.
+     * @param phoneNumber The phone number of the new member. Is not allowed to be null.
+     * @return {@code true} if the member was added successfully, {@code false} otherwise.
+     */
     public boolean addMember(String name, String phoneNumber) {
         if (name == null || name.trim().isEmpty()) {
             System.err.println("Name is not allowed to be null!");
@@ -73,7 +89,12 @@ public class PhonebookManager {
         return true;
     }
 
-    // edit an existing entry
+    /**
+     * edits an existing member's phone number.
+     * @param name The name of the member to edit.
+     * @param newPhoneNumber The new phone number. Is not allowed to be null.
+     * @return {@code true} if the member was edited successfully, {@code false} otherwise.
+     */
     public boolean editMember(String name, String newPhoneNumber) {
         if (!members.containsKey(name.trim())) {
             System.err.println("Member '" + name.trim() + "' not found.");
@@ -88,7 +109,11 @@ public class PhonebookManager {
         return true;
     }
 
-    // remove an entry
+    /**
+     * removes a member from the phonebook based on the name.
+     * @param name The name of the member to remove.
+     * @return {@code true} if the member was removed successfully, {@code false} otherwise.
+     */
     public boolean removeMember(String name) {
         if (!members.containsKey(name.trim())) {
             System.err.println("Member '" + name.trim() + "' not found.");
@@ -99,7 +124,9 @@ public class PhonebookManager {
         return true;
     }
 
-    // show all entries
+    /**
+     * displays all members in the phonebook, sorted by name.
+     */
     public void displayMembers() {
         if (members.isEmpty()) {
             System.out.println("Phonebook is empty.");
@@ -113,7 +140,10 @@ public class PhonebookManager {
         System.out.println("-------------------------");
     }
 
-    // Getter, if needed
+    /**
+     * returns a copy of the members map.
+     * @return a map (name -> phone number) of all members
+     */
     public Map<String, String> getMembers() {
         return new HashMap<>(members); // returns a copy to avoid external modification
     }
