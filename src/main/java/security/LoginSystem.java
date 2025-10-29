@@ -2,7 +2,18 @@ package security;
 
 import exceptions.LoginFailedException;
 
+/**
+ * A simple static method to authenticate a user.
+ */
 public class LoginSystem {
+
+    /**
+     * Attempts to log in with the provided username and password.
+     * The method checks for null or empty inputs and throws a LoginFailedException if the credentials are incorrect.
+     * @param username The username to log in with.
+     * @param password The password to log in with.
+     * @throws LoginFailedException if the login fails due to incorrect credentials, invalid input or null.
+     */
     public static void login(String username, String password) throws LoginFailedException {
         String correctUser = "volkan";
         String correctPassword = "123";
