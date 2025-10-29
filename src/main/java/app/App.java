@@ -1,3 +1,48 @@
+/**
+ * App provides simple arithmetic operations on two integer operands.
+ *
+ * <p>This utility class offers methods to add, subtract, multiply and divide
+ * two integers. Methods return int results for add, subtract and multiply,
+ * and double for division. The class is stateless and can be used wherever
+ * basic integer arithmetic is needed.</p>
+ *
+ * <p>Note: add, subtract and multiply operate on primitive {@code int} values
+ * and do not check for overflow — results may wrap according to Java's
+ * integer arithmetic rules.</p>
+ */
+ 
+/**
+ * Add two integers.
+ *
+ * @param a the first addend
+ * @param b the second addend
+ * @return the sum of {@code a} and {@code b}
+ */
+ 
+/**
+ * Subtract one integer from another.
+ *
+ * @param a the minuend
+ * @param b the subtrahend
+ * @return the result of {@code a - b}
+ */
+ 
+/**
+ * Multiply two integers.
+ *
+ * @param a the first factor
+ * @param b the second factor
+ * @return the product of {@code a} and {@code b}
+ */
+ 
+/**
+ * Divide one integer by another.
+ *
+ * @param a the dividend
+ * @param b the divisor
+ * @return the quotient of {@code a} divided by {@code b} as a {@code double}
+ * @throws IllegalArgumentException if {@code b} is zero
+ */
 package app;
 
 
