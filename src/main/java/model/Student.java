@@ -1,3 +1,7 @@
+/**
+ * Represents a student, which is a type of person with an associated subject of study.
+ * Inherits from the {@link Person} class.
+ */
 package model;
 
 public class Student extends Person {
