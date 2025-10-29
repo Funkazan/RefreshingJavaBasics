@@ -136,7 +136,7 @@ public class PhonebookManager {
         // sorted display
         members.entrySet().stream()
             .sorted(Map.Entry.comparingByKey())
-            .forEach(entry -> System.out.println(entry.getKey() + " - " + entry.getValue()));
+            .forEach(entry -> System.out.println(entry.getKey() + " => " + entry.getValue()));
         System.out.println("-------------------------");
     }
 
