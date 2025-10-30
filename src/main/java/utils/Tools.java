@@ -2,9 +2,9 @@
  * Utility class providing simple demonstration methods for basic Java
  * concepts such as printing, conditionals, loops, arrays and arithmetic.
  *
- * <p>All methods are static and are intended for small example programs or
+ * All methods are static and are intended for small example programs or
  * learning purposes. Methods either print results to standard output or
- * return a simple computed value.</p>
+ * return a simple computed value.
  *
  * @since 1.0
  */
@@ -31,8 +31,8 @@ public class Tools {
     /**
      * Computes and returns the product of three integer dimensions.
      *
-     * <p>Although the method name suggests a cube, it accepts three possibly
-     * different dimensions and returns a volume as a × b × c.</p>
+     * Although the method name suggests a cube, it accepts three possibly
+     * different dimensions and returns a volume as a × b × c.
      *
      * @param a first dimension
      * @param b second dimension

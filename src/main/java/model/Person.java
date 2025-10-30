@@ -2,10 +2,10 @@
  * Represents a person with a name and age.
  * Provides methods to get and set the person's age with validation,
  * and to introduce the person.
- * <p>
+ * 
  * If an invalid age is provided during construction, the age is set to 0
  * and an error message is printed.
- * </p>
+ * 
  *
  * @author Volkan Akkan
  */
