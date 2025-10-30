@@ -1,10 +1,10 @@
 /**
  * Represents a dog in the animals hierarchy.
  *
- * <p>This concrete subclass of {@link animals.Animal} provides a dog-specific
+ * This concrete subclass of {@link animals.Animal} provides a dog-specific
  * implementation of the {@code sound()} behavior. It is intended for use in
  * examples, tests, and small applications that demonstrate polymorphism
- * across different animal types.</p>
+ * across different animal types.
  *
  * @see animals.Animal
  */
@@ -12,8 +12,8 @@
 /**
  * Produce the sound associated with a dog.
  *
- * <p>Overrides {@link animals.Animal#sound()} to print a dog-specific message
- * ("The dog is barking!") to standard output.</p>
+ * Overrides {@link animals.Animal#sound()} to print a dog-specific message
+ * ("The dog is barking!") to standard output.
  *
  * @implSpec This implementation writes a single line to {@link System#out}.
  */

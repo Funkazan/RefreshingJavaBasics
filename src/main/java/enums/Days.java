@@ -3,23 +3,23 @@ package enums;
 
 /**
  * The {@code Days} enum represents the days of the week, providing their names in German, English, and Turkish.
- * <p>
+ * 
  * Each enum constant corresponds to a day of the week and stores its name in three different languages.
- * </p>
+ * 
  *
- * <ul>
- *   <li>{@link #MONDAY} - Montag, Monday, Pazartesi</li>
- *   <li>{@link #TUESDAY} - Dienstag, Tuesday, Salı</li>
- *   <li>{@link #WEDNESDAY} - Mittwoch, Wednesday, Çarşamba</li>
- *   <li>{@link #THURSDAY} - Donnerstag, Thursday, Perşembe</li>
- *   <li>{@link #FRIDAY} - Freitag, Friday, Cuma</li>
- *   <li>{@link #SATURDAY} - Samstag, Saturday, Cumartesi</li>
- *   <li>{@link #SUNDAY} - Sonntag, Sunday, Pazar</li>
- * </ul>
+ * 
+ *   {@link #MONDAY} - Montag, Monday, Pazartesi
+ *   {@link #TUESDAY} - Dienstag, Tuesday, Salı
+ *   {@link #WEDNESDAY} - Mittwoch, Wednesday, Çarşamba
+ *   {@link #THURSDAY} - Donnerstag, Thursday, Perşembe
+ *   {@link #FRIDAY} - Freitag, Friday, Cuma
+ *   {@link #SATURDAY} - Samstag, Saturday, Cumartesi
+ *   {@link #SUNDAY} - Sonntag, Sunday, Pazar
+ * 
  *
- * <p>
+ * 
  * Provides methods to retrieve the name of the day in German, English, and Turkish.
- * </p>
+ * 
  *
  * @author Volkan Akkan
  */

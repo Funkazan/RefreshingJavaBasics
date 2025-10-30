@@ -1,40 +1,40 @@
 /**
  * Main class for the Demo-Application.
- * <p>
+ * 
  * This application demonstrates:
- * <ul>
- *   <li>User authentication via a login system</li>
- *   <li>Reflection to read custom annotations on methods</li>
- *   <li>A simple phonebook manager with add, edit, remove, display, and save functionalities</li>
- * </ul>
  * 
- * <h2>Features:</h2>
- * <ol>
- *   <li><b>Login Function:</b> Prompts the user for credentials and authenticates using {@link security.LoginSystem}.</li>
- *   <li><b>Reflection Demo:</b> Uses reflection to read {@link annotations.TaskStatus} annotations from {@link app.TaskProcessor} methods.</li>
- *   <li><b>Phonebook Manager:</b> Provides a menu-driven interface to manage phonebook entries using {@link phonebook.PhonebookManager}.</li>
- * </ol>
+ *   User authentication via a login system.
+ *   Reflection to read custom annotations on methods.
+ *   A simple phonebook manager with add, edit, remove, display, and save functionalities.
  * 
- * <h2>Usage:</h2>
- * <ul>
- *   <li>Run the application. If login fails, access to the phonebook is denied.</li>
- *   <li>Upon successful login, annotation information is displayed.</li>
- *   <li>The phonebook menu allows adding, editing, removing, displaying, and saving members.</li>
- * </ul>
  * 
- * <h2>Dependencies:</h2>
- * <ul>
- *   <li>{@link security.LoginSystem} for authentication</li>
- *   <li>{@link exceptions.LoginFailedException} for login error handling</li>
- *   <li>{@link app.TaskProcessor} and {@link annotations.TaskStatus} for reflection demo</li>
- *   <li>{@link phonebook.PhonebookManager} for phonebook management</li>
- * </ul>
+ * Features:
  * 
- * <h2>Note:</h2>
- * <ul>
- *   <li>Uses a single {@link Scanner} instance for user input.</li>
- *   <li>Attempts to use {@link java.io.Console} for password input without echo, falls back to {@link Scanner} if unavailable.</li>
- * </ul>
+ *   Login Function: Prompts the user for credentials and authenticates using {@link security.LoginSystem}.
+ *   Reflection Demo: Uses reflection to read {@link annotations.TaskStatus} annotations from {@link app.TaskProcessor} methods.
+ *   Phonebook Manager: Provides a menu-driven interface to manage phonebook entries using {@link phonebook.PhonebookManager}.
+ * 
+ * 
+ * Usage:
+ * 
+ *   Run the application. If login fails, access to the phonebook is denied.
+ *   Upon successful login, annotation information is displayed.
+ *   The phonebook menu allows adding, editing, removing, displaying, and saving members.
+ * 
+ * 
+ * Dependencies:
+ * 
+ *   {@link security.LoginSystem} for authentication.
+ *   {@link exceptions.LoginFailedException} for login error handling.
+ *   {@link app.TaskProcessor} and {@link annotations.TaskStatus} for reflection demo.
+ *   {@link phonebook.PhonebookManager} for phonebook management.
+ * 
+ * 
+ * Note:
+ * 
+ *   Uses a single {@link Scanner} instance for user input.
+ *   Attempts to use {@link java.io.Console} for password input without echo, falls back to {@link Scanner} if unavailable.
+ * 
  * 
  * @author Volkan Akkan
  */
