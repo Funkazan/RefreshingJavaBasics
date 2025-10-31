@@ -148,6 +148,11 @@ public class PhonebookManager {
         return new HashMap<>(members); // returns a copy to avoid external modification
     }
 
+    /**
+     * searches for members whose name contains the search term (case insensitive)
+     * or whose phone number contains the search term (case sensitive).
+     * @param term The search term. Is not allowed to be null.
+     */
     public void searchMembers(String term) {
         if (term == null || term.trim().isEmpty()) {
             System.out.println("Search term is not allowed to be null!");
