@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PhonebookManagerTest {
 
-    // Verwende einen dedizierten Dateinamen für die Tests
+    // test-specified file name to avoid conflicts with real data
     private static final String TEST_FILENAME = "test_phonebook.txt";
     private static final Path TEST_FILE_PATH = Path.of(TEST_FILENAME);
     private PhonebookManager manager;
 
     /**
-     * Führt vor jedem Test aus. Stellt sicher, dass die Testdatei existiert,
-     * aber leer ist (simuliert einen neuen Start).
+     * runs before each test. Initializes a fresh PhonebookManager instance.
+     * @throws IOException
      */
     @BeforeEach
     void setup() throws IOException {
@@ -32,14 +32,15 @@ public class PhonebookManagerTest {
     }
 
     /**
-     * Führt nach jedem Test aus. Löscht die Testdatei, um die Umgebung zu bereinigen.
+     * runs after each test. Cleans up the test file.
+     * @throws IOException
      */
     @AfterEach
     void cleanup() throws IOException {
         Files.deleteIfExists(TEST_FILE_PATH);
     }
 
-    // --- TESTFÄLLE FÜR HINZUFÜGEN ---
+    // --- tests for adding ---
 
     @Test
     @DisplayName("Sollte einen neuen Member erfolgreich hinzufügen")
@@ -66,7 +67,22 @@ public class PhonebookManagerTest {
         assertEquals("3333", manager.getMembers().get("Charlie"), "Die Originalnummer sollte nicht überschrieben werden.");
     }
 
-    // --- TESTFÄLLE FÜR BEARBEITEN ---
+    // --- tests for searching ---
+    @Test
+    @DisplayName("Sollte Mitglieder basierend auf Suchbegriff finden")
+    void shouldSearchMembersSuccessfully() {
+        manager.addMember("Anna", "1234");
+        manager.addMember("Sina", "5678");
+        manager.addMember("Bob", "8521");
+
+        Map<String, String> results = manager.searchMembers("Anna");
+        assertEquals(2, results.size());
+        assertTrue(results.containsKey("Anna"));
+        assertTrue(results.containsKey("5678"));
+        assertFalse(results.containsKey("Bob"));
+    }
+
+    // --- tests for editing ---
 
     @Test
     @DisplayName("Sollte einen bestehenden Member erfolgreich bearbeiten")
@@ -90,7 +106,7 @@ public class PhonebookManagerTest {
         assertEquals("6666", manager.getMembers().get("Eva"), "Nummer sollte nicht gelöscht werden.");
     }
 
-    // --- TESTFÄLLE FÜR ENTFERNEN ---
+    // --- tests for removing ---
 
     @Test
     @DisplayName("Sollte einen bestehenden Member erfolgreich entfernen")
@@ -107,21 +123,21 @@ public class PhonebookManagerTest {
         assertFalse(manager.removeMember("Unbekannt"));
     }
 
-    // --- TESTFÄLLE FÜR SPEICHERN/LADEN ---
+    // --- tests for saving & loading ---
 
     @Test
     @DisplayName("Sollte nach Speichern die korrekten Daten laden")
     void shouldLoadMembersFromFile() throws IOException {
-        // 1. Initialisiere und füge Daten hinzu
+        // 1. initialize and save members
         manager.addMember("Gaby", "8888");
         manager.addMember("Hans", "9999");
         manager.saveMembers();
 
-        // 2. Erstelle einen NEUEN Manager, um die Daten zu laden
+        // 2. create new manager to load from file
         PhonebookManager newManager = new PhonebookManager(TEST_FILENAME);
         Map<String, String> loadedMembers = newManager.getMembers();
 
-        // 3. Überprüfen
+        // 3. check loaded data
         assertEquals(2, loadedMembers.size());
         assertEquals("8888", loadedMembers.get("Gaby"));
         assertEquals("9999", loadedMembers.get("Hans"));
@@ -130,7 +146,7 @@ public class PhonebookManagerTest {
     @Test
     @DisplayName("Sollte ein leeres Telefonbuch initialisieren, wenn keine Datei existiert")
     void shouldInitializeEmptyWhenNoFileExists() {
-        // Der @BeforeEach-Hook löscht die Datei, also sollte der Manager leer starten
+        // the @BeforeEach-Hook already ensures the file does not exist
         assertEquals(0, manager.getMembers().size());
     }
 }

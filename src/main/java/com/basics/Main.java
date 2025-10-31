@@ -112,10 +112,11 @@ public class Main {
         while (true) {
             System.out.println("\n--- MENÜ ---");
             System.out.println("1. Add Member");
-            System.out.println("2. Edit Member");
-            System.out.println("3. Remove Member");
-            System.out.println("4. Show Members");
-            System.out.println("5. Save and Exit");
+            System.out.println("2. Search Members");
+            System.out.println("3. Edit Member");
+            System.out.println("4. Remove Member");
+            System.out.println("5. Show Members");
+            System.out.println("6. Save and Exit");
             System.out.print("Choice: ");
 
             String choice = scanner.nextLine().trim();
@@ -129,21 +130,26 @@ public class Main {
                     phonebookManager.addMember(nameAdd, phoneAdd);
                     break;
                 case "2":
+                    System.out.print("What do you want to search for?: ");
+                    String searchQuery = scanner.nextLine().trim();
+                    phonebookManager.searchMembers(searchQuery);
+                    break;
+                case "3":
                     System.out.print("Which Member should be edited? (Name): ");
                     String editName = scanner.nextLine().trim();
                     System.out.print("New Phonenumber: ");
                     String newPhone = scanner.nextLine().trim();
                     phonebookManager.editMember(editName, newPhone);
                     break;
-                case "3":
+                case "4":
                     System.out.print("Which Member should be removed? (Name): ");
                     String removeName = scanner.nextLine().trim();
                     phonebookManager.removeMember(removeName);
                     break;
-                case "4":
+                case "5":
                     phonebookManager.displayMembers();
                     break;
-                case "5":
+                case "6":
                     phonebookManager.saveMembers(); // Save before exit
                     System.out.println("Data saved. Exiting application.");
                     scanner.close(); // close Scanner

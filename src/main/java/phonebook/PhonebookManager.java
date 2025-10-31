@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map; // for Map.Entry
+import java.util.stream.Collectors;
 
 /**
  * Manages a phonebook with functionalities to add, edit, remove, display, load, and save members.
@@ -153,10 +154,10 @@ public class PhonebookManager {
      * or whose phone number contains the search term (case sensitive).
      * @param term The search term. Is not allowed to be null.
      */
-    public void searchMembers(String term) {
+    public Map<String, String> searchMembers(String term) {
         if (term == null || term.trim().isEmpty()) {
             System.out.println("Search term is not allowed to be null!");
-            return;
+            return new HashMap<>(); // return empty result if term is invalid
         }
 
         String lowerCaseTerm = term.trim().toLowerCase();
@@ -164,18 +165,25 @@ public class PhonebookManager {
         System.out.println("\n--- Search Results for '" + term + "' ---");
 
         // filtering with streams API
-        long matchCount = members.entrySet().stream()
+        Map<String, String> searchResults = members.entrySet().stream()
             .filter(entry -> 
             entry.getKey().toLowerCase().contains(lowerCaseTerm) || //Filter 1: name contains term (case insensitive)
             entry.getValue().contains(term)                        //Filter 2: phone number contains term (case sensitive)
             )
-            .peek(entry -> System.out.println(entry.getKey() + " => " + entry.getValue())) // Intermediate operation: takes action and returns the stream
-            .count(); // Terminal operation: counts the results and ends the stream
+            .collect(Collectors.toMap(
+                Map.Entry::getKey, 
+                Map.Entry::getValue
+            ));
 
-        if (matchCount == 0) {
+        // Optional: display results
+        if (searchResults.isEmpty()) {
             System.out.println("No matches found for '" + term + "'.");
+        } else {
+            System.out.println("Results for: '" + term + "':");
+            searchResults.forEach((name, phone) -> System.out.println(name + " => " + phone));
+            System.out.println("-------------------------");
+            System.out.println(searchResults.size() + " match(es) found.");
         }
-        System.out.println("-------------------------");
-        System.out.println(matchCount + " match(es) found.");
+        return searchResults; // return the results for potential further processing
     }
 }
