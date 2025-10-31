@@ -147,4 +147,30 @@ public class PhonebookManager {
     public Map<String, String> getMembers() {
         return new HashMap<>(members); // returns a copy to avoid external modification
     }
+
+    public void searchMembers(String term) {
+        if (term == null || term.trim().isEmpty()) {
+            System.out.println("Search term is not allowed to be null!");
+            return;
+        }
+
+        String lowerCaseTerm = term.trim().toLowerCase();
+
+        System.out.println("\n--- Search Results for '" + term + "' ---");
+
+        // DEMONSTRATION 2: filtering with streams API
+        long matchCount = members.entrySet().stream()
+            .filter(entry -> 
+            entry.getKey().toLowerCase().contains(lowerCaseTerm) || //Filter 1: name contains term (case insensitive)
+            entry.getValue().contains(term)                        //Filter 2: phone number contains term (case sensitive)
+            )
+            .peek(entry -> System.out.println(entry.getKey() + " => " + entry.getValue())) // Intermediate operation: takes action and returns the stream
+            .count(); // Terminal operation: counts the results and ends the stream
+
+        if (matchCount == 0) {
+            System.out.println("No matches found for '" + term + "'.");
+        }
+        System.out.println("-------------------------");
+        System.out.println(matchCount + " match(es) found.");
+    }
 }
