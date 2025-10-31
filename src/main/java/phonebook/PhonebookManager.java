@@ -163,7 +163,7 @@ public class PhonebookManager {
 
         System.out.println("\n--- Search Results for '" + term + "' ---");
 
-        // DEMONSTRATION 2: filtering with streams API
+        // filtering with streams API
         long matchCount = members.entrySet().stream()
             .filter(entry -> 
             entry.getKey().toLowerCase().contains(lowerCaseTerm) || //Filter 1: name contains term (case insensitive)
