@@ -69,18 +69,22 @@ public class PhonebookManagerTest {
 
     // --- tests for searching ---
     @Test
-    @DisplayName("Sollte Mitglieder basierend auf Suchbegriff finden")
+    @DisplayName("Sollte Mitglieder basierend auf Suchbegriff im Namen oder der Nummer finden")
     void shouldSearchMembersSuccessfully() {
-        manager.addMember("Anna", "1234");
-        manager.addMember("Sina", "5678");
-        manager.addMember("Bob", "8521");
-
-        Map<String, String> results = manager.searchMembers("Anna");
-        assertEquals(2, results.size());
-        assertTrue(results.containsKey("Anna"));
-        assertTrue(results.containsKey("5678"));
-        assertFalse(results.containsKey("Bob"));
-    }
+        // Füge zwei eindeutige Einträge hinzu, die beide "Anna" im Namen tragen (oder suche nach einem Teilstring)
+        manager.addMember("Anna Müller", "01764567"); 
+        manager.addMember("Anna Schmidt", "01511234"); // EINZIGARTIGER NAME
+        manager.addMember("Max Meier", "01769999");
+        
+        // Korrigierte Erwartung: Sollte beide Anna-Einträge finden
+        Map<String, String> results = manager.searchMembers("Anna"); 
+        
+        // Jetzt ist die Erwartung 2 korrekt, da wir zwei verschiedene Namen gespeichert haben
+        assertEquals(2, results.size(), "Sollte 2 Einträge mit 'Anna' im Namen finden."); 
+        assertTrue(results.containsKey("Anna Müller"));
+        assertTrue(results.containsKey("Anna Schmidt"));
+        assertFalse(results.containsKey("Max Meier"));
+    }   
 
     // --- tests for editing ---
 

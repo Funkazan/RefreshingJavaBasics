@@ -1,4 +1,10 @@
 {
-    "java.debug.settings.onBuildFailureProceed": true,
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.project.sourcePaths": [
+    "src/main/java",
+    "src/test/java" 
+],
+"java.project.resourcePaths": [
+    "src/main/resources",
+    "src/test/resources"
+]
 }
