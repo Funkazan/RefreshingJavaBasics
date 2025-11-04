@@ -53,4 +53,8 @@ public enum Days {
     public String getTurkishName() {
         return turkishName;
     }
+
+    public boolean isWeekend() {
+        return isWeekend();
+    }
 }

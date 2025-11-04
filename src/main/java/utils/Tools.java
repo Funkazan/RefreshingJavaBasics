@@ -10,6 +10,12 @@
  */
 package utils;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import enums.Days;
+
 public class Tools {
     
     /**
@@ -78,16 +84,14 @@ public class Tools {
     }
 
     /**
-     * Prints an indexed list of day names from an internal array to standard output.
-     * Each line is printed in the format: "Day {index}: {dayName}", where index starts at 0.
-     *
-     * Note: The method prints the contents of its internal array as-is.
+     * Returns a list of the names of weekend days (Saturday and Sunday)
+     * @return
      */
-    public static void getDaysOfWeek() {
-        String[] days = {"Monday", "Thusday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        for (int i = 0; i < days.length; i++) {
-            System.out.println("Day " + i + ": " + days[i]);
-        }
+    public static List<String> getWeekendDays() {
+        return Arrays.stream(Days.values())
+                .filter(Days::isWeekend)
+                .map(Days::getEnglishName)
+                .collect(Collectors.toList());
     }
 
 }
