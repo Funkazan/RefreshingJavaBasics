@@ -84,6 +84,17 @@ public class Tools {
     }
 
     /**
+     * Returns a list of the names of all weekdays (Monday to Friday)
+     * @return
+     */
+    public static List<String> getAllDays() {
+        return Arrays.stream(Days.values())
+                .filter(day -> !day.isWeekend())
+                .map(Days::getEnglishName)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Returns a list of the names of weekend days (Saturday and Sunday)
      * @return
      */

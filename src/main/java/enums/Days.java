@@ -24,25 +24,36 @@ package enums;
  * @author Volkan Akkan
  */
 public enum Days {
-    MONDAY("Montag", "Monday", "Pazartesi"),
-    TUESDAY("Dienstag", "Tuesday", "Salı"),
-    WEDNESDAY("Mittwoch", "Wednesday", "Çarşamba"),
-    THURSDAY("Donnerstag", "Thursday", "Perşembe"),
-    FRIDAY("Freitag", "Friday", "Cuma"),
-    SATURDAY("Samstag", "Saturday", "Cumartesi"),
-    SUNDAY("Sonntag", "Sunday", "Pazar");
+    MONDAY("Montag", "Monday", "Pazartesi", false),
+    TUESDAY("Dienstag", "Tuesday", "Salı", false),
+    WEDNESDAY("Mittwoch", "Wednesday", "Çarşamba", false),
+    THURSDAY("Donnerstag", "Thursday", "Perşembe", false),
+    FRIDAY("Freitag", "Friday", "Cuma", false),
+    SATURDAY("Samstag", "Saturday", "Cumartesi", true),
+    SUNDAY("Sonntag", "Sunday", "Pazar", true);
 
     private final String germanName;
     private final String englishName;
     private final String turkishName;
+    private final boolean isWeekend;
 
-    Days(String germanName, String englishName, String turkishName) {
+    /**
+     * Constructor for the Days enum. Initializes the names in different languages and weekend status.
+     * Available languages: German, English, Turkish.
+     * Weekend days are Saturday and Sunday.
+     * @param germanName
+     * @param englishName
+     * @param turkishName
+     * @param isWeekend
+     */
+    Days(String germanName, String englishName, String turkishName, boolean isWeekend) {
         this.germanName = germanName;
         this.englishName = englishName;
         this.turkishName = turkishName;
+        this.isWeekend = isWeekend;
     }
 
-    public String getDeutscheBezeichnung() {
+    public String getGermanName() {
         return germanName;
     }
 
@@ -55,6 +66,10 @@ public enum Days {
     }
 
     public boolean isWeekend() {
-        return isWeekend();
+        return this.isWeekend;
+    }
+
+    public boolean isWeekday() {
+        return !this.isWeekend;
     }
 }

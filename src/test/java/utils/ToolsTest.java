@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*; // Für Assertions
 // Import für System.out.println capturing (fortgeschritten, siehe Erklärung unten)
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 
 public class ToolsTest {
@@ -98,23 +99,55 @@ public class ToolsTest {
     }
 
     @Test
-    @DisplayName("Sollte korrekte Wochentage ausgeben (inkl. Tippfehler)")
-    void getDaysOfWeek_ShouldPrintDaysCorrectly() {
-        Tools.getDaysOfWeek();
-        String expectedOutput = 
-            "Day 0: Monday" + System.lineSeparator() + 
-            "Day 1: Thusday" + System.lineSeparator() + 
-            "Day 2: Wednesday" + System.lineSeparator() +
-            "Day 3: Thursday" + System.lineSeparator() +
-            "Day 4: Friday" + System.lineSeparator() +
-            "Day 5: Saturday" + System.lineSeparator() +
-            "Day 6: Sunday" + System.lineSeparator();
+    @DisplayName("Sollte alle 7 Wochentage als Liste in der korrekten Reihenfolge zurückgeben (getAllDays)")
+    void getAllDays_ShouldReturnAll7Days() {
         
-        assertEquals(expectedOutput, outContent.toString());
+        // Erwartete Liste der deutschen Wochentagsnamen
+        List<String> expectedDays = List.of(
+            "Montag",
+            "Dienstag",
+            "Mittwoch",
+            "Donnerstag",
+            "Freitag",
+            "Samstag",
+            "Sonntag"
+        );
         
-        // Hinweis: Ein "richtiger" Test würde hier vielleicht einen Fehler melden,
-        // dass "Montay" falsch geschrieben ist. Wenn die Methode so bleiben soll,
-        // testen wir nur, dass sie das tut, was sie tun soll (nämlich den Fehler ausgeben).
+        List<String> actualDays = Tools.getAllDays();
+
+        // 1. Größe prüfen
+        assertEquals(7, actualDays.size(), "Die Liste sollte exakt 7 Wochentage enthalten.");
+        
+        // 2. Inhalt und Reihenfolge prüfen
+        assertEquals(expectedDays, actualDays, "Die Wochentage sollten in der erwarteten Reihenfolge vorliegen.");
+        
+        // 3. Typische Tage prüfen (zusätzliche Sicherheit)
+        assertEquals("Montag", actualDays.get(0));
+        assertEquals("Freitag", actualDays.get(4));
+    }
+
+
+    @Test
+    @DisplayName("Sollte nur 2 Wochenendtage als Liste zurückgeben (getWeekendDays)")
+    void getWeekendDays_ShouldReturnOnly2Days() {
+        
+        // Erwartete Liste nur der Wochenendtage
+        List<String> expectedWeekends = List.of(
+            "Samstag",
+            "Sonntag"
+        );
+        
+        List<String> actualWeekends = Tools.getWeekendDays();
+
+        // 1. Größe prüfen
+        assertEquals(2, actualWeekends.size(), "Die Liste sollte exakt 2 Wochenendtage enthalten.");
+        
+        // 2. Inhalt prüfen
+        assertEquals(expectedWeekends, actualWeekends, "Die Methode sollte nur Samstag und Sonntag zurückgeben.");
+        
+        // 3. Spezifische Tage prüfen
+        assertTrue(actualWeekends.contains("Samstag"));
+        assertFalse(actualWeekends.contains("Montag"), "Wochentage dürfen nicht enthalten sein.");
     }
 
     // Für die `person`-Methode könnte man analog vorgehen, aber es wird schnell komplex,
