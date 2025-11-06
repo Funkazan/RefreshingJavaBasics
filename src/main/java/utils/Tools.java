@@ -89,8 +89,7 @@ public class Tools {
      */
     public static List<String> getAllDays() {
         return Arrays.stream(Days.values())
-                .filter(day -> !day.isWeekend())
-                .map(Days::getEnglishName)
+                .map(Days::getGermanName)
                 .collect(Collectors.toList());
     }
 
@@ -101,7 +100,7 @@ public class Tools {
     public static List<String> getWeekendDays() {
         return Arrays.stream(Days.values())
                 .filter(Days::isWeekend)
-                .map(Days::getEnglishName)
+                .map(Days::getGermanName)
                 .collect(Collectors.toList());
     }
 
